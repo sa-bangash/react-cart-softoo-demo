@@ -2,7 +2,7 @@ import Product from "../../../core/models/product";
 export type FetchCartProductParam = {
   colour: string;
 };
-const fetchCartProduct = async (
+export const fetchCartProduct = async (
   param?: FetchCartProductParam
 ): Promise<Array<Product>> => {
   const queryParams = new URLSearchParams();
@@ -21,5 +21,3 @@ const fetchCartProduct = async (
     throw new Error(`Error fetching data: ${error}`);
   }
 };
-
-export default fetchCartProduct;

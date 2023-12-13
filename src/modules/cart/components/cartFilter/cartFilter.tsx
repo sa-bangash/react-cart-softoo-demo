@@ -14,6 +14,7 @@ export const CartFilter: React.FC<CartFilterProps> = ({ onColourChange }) => {
       <select
         onChange={handleColorChange}
         className="cart-filter__colour-select"
+        data-testid="cart-color-select"
       >
         <option value="">
           Colour Filter

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import fetchCartProduct, {
+import {
+  fetchCartProduct,
   FetchCartProductParam,
 } from "../api/fetchCartProducts";
 import { CartItemModel } from "../models/CartItem";
@@ -63,7 +64,7 @@ const CartContainer: React.FC = () => {
     <div className="cart-container">
       <CartFilter onColourChange={onColourChange}></CartFilter>
       {loading ? (
-        <div>loading...</div>
+        <div data-testid="loading-text">loading...</div>
       ) : (
         <>
           {cartItems.map((item) => {

@@ -20,6 +20,7 @@ export const CartItem: React.FC<CartProductProps> = memo(
         <div className="cart-item__actions">
           <div className="cart-item__quantity-controls">
             <button
+            data-testid="reduce-btn"
               onClick={() => onReduce(cartItem.product.id)}
               className="cart-item__reduce"
               disabled={cartItem.qty < 2}
@@ -28,6 +29,7 @@ export const CartItem: React.FC<CartProductProps> = memo(
             </button>
             <div>{cartItem.qty}</div>
             <button
+              data-testid="add-btn"
               onClick={() => onAdd(cartItem.product.id)}
               className="cart-item__add"
             >
@@ -35,10 +37,11 @@ export const CartItem: React.FC<CartProductProps> = memo(
             </button>
           </div>
           <button
+            data-testid="remove-btn"
             onClick={() => onRemove(cartItem.product.id)}
             className="cart-item__remove"
           >
-            Removed
+            Remove
           </button>
         </div>
       </div>

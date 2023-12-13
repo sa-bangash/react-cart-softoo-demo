@@ -1,4 +1,4 @@
-import { CartItemModel } from "../models/CartItem";
+import { CartItemModel } from "../../models/CartItem";
 interface CartTotalProps {
   cartItems: Array<CartItemModel>;
 }
