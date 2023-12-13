@@ -9,7 +9,6 @@ import {
 import CartContainer from "./cartContainer";
 import * as api from "../api/fetchCartProducts";
 import Product from "../../../core/models/product";
-// eslint-disable-next-line testing-library/no-unnecessary-act
 
 describe("CartContainer Component", () => {
   const mockCartItems: Product[] = [
