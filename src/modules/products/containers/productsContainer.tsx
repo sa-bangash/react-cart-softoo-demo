@@ -4,7 +4,7 @@ import { FetchCartProductParam, fetchCartProduct } from "../api/fetchProducts";
 import ProductCard from "../components/productCard/productCard";
 import { ProductFilter } from "../components/productFilter/productFilter";
 import "./productsContainer.scss";
-import { useCart } from "../../cart/store/cartContext";
+import { useCart } from "../../cart/context/cartContext";
 export const ProductsContainer: React.FC = () => {
   const { addToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);

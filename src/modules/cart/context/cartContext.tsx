@@ -6,7 +6,7 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
-interface CartContextProps {
+export interface CartContextProps {
   cartItems: CartItemModel[];
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;

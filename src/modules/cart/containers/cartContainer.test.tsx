@@ -1,46 +1,47 @@
-/* eslint-disable testing-library/no-unnecessary-act */
-import React from "react";
-import {
-  render,
-  fireEvent,
-  screen,
-  act,
-} from "@testing-library/react";
+import { CartProvider } from "../context/cartContext";
 import CartContainer from "./cartContainer";
-import * as api from "../api/fetchCartProducts";
-import Product from "../../../core/models/product";
+import { useCart } from "../context/cartContext";
+import { render, screen } from "@testing-library/react";
 
+jest.mock("../context/cartContext", () => ({
+  ...jest.requireActual("../context/cartContext"),
+  useCart: jest.fn(),
+}));
 describe("CartContainer Component", () => {
-  const mockCartItems: Product[] = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 10,
-      img: "image-url",
-      colour: "black",
-    },
-  ];
+  it("renders cart items and total correctly", () => {
+    (useCart as jest.Mock).mockReturnValue({
+      cartItems: [
+        { product: { id: 1, name: "Product 1", price: 20 }, qty: 2 },
+        { product: { id: 2, name: "Product 2", price: 30 }, qty: 1 },
+      ],
+      removeFromCart: jest.fn(),
+      reduceQuantity: jest.fn(),
+      addToCart: jest.fn(),
+    });
 
-  beforeEach(() => {
-    jest.spyOn(api, "fetchCartProduct").mockResolvedValue(mockCartItems);
+    render(
+      <CartProvider>
+        <CartContainer />
+      </CartProvider>
+    );
+
+    expect(screen.getByText("Product 1")).toBeInTheDocument();
+    expect(screen.getByText("Product 2")).toBeInTheDocument();
   });
 
-  it("renders CartContainer component correctly", async () => {
-    await act(async () => {
-      await render(<CartContainer />);
-    });
-    expect(screen.getByText(mockCartItems[0].name)).toBeInTheDocument();
-  });
-
-  it("filter cart base on selected filter color", async () => {
-    await act(async () => {
-      await render(<CartContainer />);
+  it("displays a message for an empty cart", () => {
+    (useCart as jest.Mock).mockReturnValue({
+      cartItems: [],
+      removeFromCart: jest.fn(),
+      reduceQuantity: jest.fn(),
+      addToCart: jest.fn(),
     });
 
-    await act(async () => {
-      const colorSelect = screen.getByTestId("cart-color-select");
-      fireEvent.change(colorSelect, { target: { value: "Red" } });
-    });
-    expect(api.fetchCartProduct).toHaveBeenCalledTimes(2);
+    render(
+      <CartProvider>
+        <CartContainer />
+      </CartProvider>
+    );
+    expect(screen.getByText("No Item in the cart!")).toBeInTheDocument();
   });
 });

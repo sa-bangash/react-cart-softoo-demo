@@ -1,6 +1,6 @@
 import { CartItem, CartTotal } from "../components";
 import "./cartContainer.scss";
-import { useCart } from "../store/cartContext";
+import { useCart } from "../context/cartContext";
 import Product from "../../../core/models/product";
 
 const CartContainer: React.FC = () => {
