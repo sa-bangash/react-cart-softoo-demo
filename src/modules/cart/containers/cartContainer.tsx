@@ -1,16 +1,16 @@
 import { CartItem, CartTotal } from "../components";
 import "./cartContainer.scss";
-import { useCart } from "../context/cartContext";
 import Product from "../../../core/models/product";
+import { useCartStore } from "../store/cartStore";
 
 const CartContainer: React.FC = () => {
-  const { cartItems, removeFromCart, reduceQantity,addToCart } = useCart();
+  const { cartItems, removeFromCart, reduceQuantity,addToCart } = useCartStore();
   const handleAdd = (product: Product) => {
     addToCart(product)
   };
 
   const handleReduce = (productId: number) => {
-    reduceQantity(productId);
+    reduceQuantity(productId);
   };
 
   const handleRemove = (productId: number) => {

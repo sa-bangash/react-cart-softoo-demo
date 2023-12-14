@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Product from "../../../core/models/product";
 import { FetchCartProductParam, fetchCartProduct } from "../api/fetchProducts";
 import ProductCard from "../components/productCard/productCard";
 import { ProductFilter } from "../components/productFilter/productFilter";
 import "./productsContainer.scss";
-import { useCart } from "../../cart/context/cartContext";
+import { useCartStore } from "../../cart/store/cartStore";
 export const ProductsContainer: React.FC = () => {
-  const { addToCart } = useCart();
+  const { addToCart } = useCartStore();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -25,13 +25,12 @@ export const ProductsContainer: React.FC = () => {
     fetchData({ colour: selectedColor });
   };
 
-  const onAddToCart = (product: Product) => {
+  const onAddToCart = useCallback((product: Product) => {
     addToCart(product);
-  };
+  }, []);
   return (
     <>
       <ProductFilter onColourChange={onColourChange}></ProductFilter>
-
       {loading ? (
         <div className="spinner"></div>
       ) : (
