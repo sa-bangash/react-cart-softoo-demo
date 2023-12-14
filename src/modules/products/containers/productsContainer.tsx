@@ -31,8 +31,9 @@ export const ProductsContainer: React.FC = () => {
   return (
     <>
       <ProductFilter onColourChange={onColourChange}></ProductFilter>
+
       {loading ? (
-        <div>loading...</div>
+        <div className="spinner"></div>
       ) : (
         <div className="products">
           {products.map((product) => (

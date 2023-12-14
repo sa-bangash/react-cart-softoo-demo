@@ -1,7 +1,12 @@
 .cart-filter {
   display: flex;
-  margin: 15px;
+  margin:15px auto;
   &__colour-select {
     min-width: 100px;
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
 }
