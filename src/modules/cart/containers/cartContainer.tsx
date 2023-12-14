@@ -1,71 +1,24 @@
-import { useEffect, useState } from "react";
-import {
-  fetchCartProduct,
-  FetchCartProductParam,
-} from "../api/fetchCartProducts";
-import { CartItemModel } from "../models/CartItem";
-import { CartFilter, CartItem, CartTotal } from "../components";
+import { CartItem, CartTotal } from "../components";
 import "./cartContainer.scss";
+import { useCart } from "../store/cartContext";
+import Product from "../../../core/models/product";
 
 const CartContainer: React.FC = () => {
-  const [cartItems, setCartItems] = useState<CartItemModel[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const fetchData = async (param?: FetchCartProductParam) => {
-    setLoading(true);
-    const data = await fetchCartProduct(param);
-    setLoading(false);
-    const cartData = data.map((product) => ({ product, qty: 1 }));
-    setCartItems(cartData);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const onColourChange = (selectedColor: string) => {
-    fetchData({ colour: selectedColor });
-  };
-
-  const handleAdd = (productId: number) => {
-    setCartItems((prevCartItems) =>
-      prevCartItems.map((item) => {
-        if (item.product.id === productId) {
-          return {
-            ...item,
-            qty: item.qty + 1,
-          };
-        }
-        return item;
-      })
-    );
+  const { cartItems, removeFromCart, reduceQantity,addToCart } = useCart();
+  const handleAdd = (product: Product) => {
+    addToCart(product)
   };
 
   const handleReduce = (productId: number) => {
-    setCartItems((prevCartItems) =>
-      prevCartItems.map((item) => {
-        if (item.product.id === productId) {
-          return {
-            ...item,
-            qty: item.qty - 1,
-          };
-        }
-        return item;
-      })
-    );
+    reduceQantity(productId);
   };
 
   const handleRemove = (productId: number) => {
-    setCartItems((prevCartItems) =>
-      prevCartItems.filter((item) => item.product.id !== productId)
-    );
+    removeFromCart(productId);
   };
-
   return (
     <div className="cart-container">
-      <CartFilter onColourChange={onColourChange}></CartFilter>
-      {loading ? (
-        <div data-testid="loading-text">loading...</div>
-      ) : (
+      {cartItems.length ? (
         <>
           {cartItems.map((item) => {
             return (
@@ -82,6 +35,10 @@ const CartContainer: React.FC = () => {
             <CartTotal cartItems={cartItems}></CartTotal>
           </div>
         </>
+      ) : (
+        <div className="empty-cart">
+          <h2>No Item in the cart!</h2>
+        </div>
       )}
     </div>
   );

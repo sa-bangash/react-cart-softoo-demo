@@ -2,9 +2,10 @@ import { memo } from "react";
 import { CartItemModel } from "../../models/CartItem";
 import { CartProduct } from "../cartProduct/cartProduct";
 import "./cartitem.scss";
+import Product from "../../../../core/models/product";
 interface CartProductProps {
   cartItem: CartItemModel;
-  onAdd: (productId: number) => void;
+  onAdd: (product: Product) => void;
   onReduce: (productId: number) => void;
   onRemove: (productId: number) => void;
 }
@@ -20,7 +21,7 @@ export const CartItem: React.FC<CartProductProps> = memo(
         <div className="cart-item__actions">
           <div className="cart-item__quantity-controls">
             <button
-            data-testid="reduce-btn"
+              data-testid="reduce-btn"
               onClick={() => onReduce(cartItem.product.id)}
               className="cart-item__reduce"
               disabled={cartItem.qty < 2}
@@ -30,7 +31,7 @@ export const CartItem: React.FC<CartProductProps> = memo(
             <div>{cartItem.qty}</div>
             <button
               data-testid="add-btn"
-              onClick={() => onAdd(cartItem.product.id)}
+              onClick={() => onAdd(cartItem.product)}
               className="cart-item__add"
             >
               +

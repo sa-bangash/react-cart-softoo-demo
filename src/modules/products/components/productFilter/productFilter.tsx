@@ -1,10 +1,12 @@
-import "./cartFilter.scss";
+import "./productFilter.scss";
 const COLOURS = ["Black", "Stone", "Red"];
-interface CartFilterProps {
+interface ProductFilterProps {
   onColourChange: (selectedColour: string) => void;
 }
 
-export const CartFilter: React.FC<CartFilterProps> = ({ onColourChange }) => {
+export const ProductFilter: React.FC<ProductFilterProps> = ({
+  onColourChange,
+}) => {
   const handleColorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedColour = e.target.value;
     onColourChange(selectedColour);
@@ -16,9 +18,7 @@ export const CartFilter: React.FC<CartFilterProps> = ({ onColourChange }) => {
         className="cart-filter__colour-select"
         data-testid="cart-color-select"
       >
-        <option value="">
-          Colour Filter
-        </option>
+        <option value="">Colour Filter</option>
         {COLOURS.map((colour) => {
           return (
             <option value={colour} key={colour}>
