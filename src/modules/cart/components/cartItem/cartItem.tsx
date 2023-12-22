@@ -16,7 +16,7 @@ const areEqual = (prevProps: CartProductProps, nextProps: CartProductProps) => {
 export const CartItem: React.FC<CartProductProps> = memo(
   ({ cartItem, onAdd, onReduce, onRemove }: CartProductProps) => {
     return (
-      <div className="cart-item">
+      <div className="cart-item" role="listitem">
         <CartProduct product={cartItem.product}></CartProduct>
         <div className="cart-item__actions">
           <div className="cart-item__quantity-controls">
@@ -28,7 +28,7 @@ export const CartItem: React.FC<CartProductProps> = memo(
             >
               -
             </button>
-            <div>{cartItem.qty}</div>
+            <h6>{cartItem.qty}</h6>
             <button
               data-testid="add-btn"
               onClick={() => onAdd(cartItem.product)}

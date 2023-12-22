@@ -33,6 +33,29 @@ describe("cartItem component", () => {
     expect(screen.getByText(mockCartItem.product.name)).toBeInTheDocument();
   });
 
+  test("it should render 1 when", () => {
+    const cartItemMock = {
+      product: {
+        id: 1,
+        name: "Test Product",
+        price: 20,
+        img: "test-image-url",
+        colour: "Black",
+      },
+      qty: 1,
+    };
+
+    render(
+      <CartItem
+        cartItem={cartItemMock}
+        onAdd={() => {}}
+        onReduce={() => {}}
+        onRemove={() => {}}
+      ></CartItem>
+    );
+
+    expect(screen.getByRole("heading", { name: "1" })).toBeInTheDocument();
+  });
   it("call add function when click add button", () => {
     const mockOnAdd = jest.fn();
     render(

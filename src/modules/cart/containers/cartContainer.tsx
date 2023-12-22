@@ -19,7 +19,7 @@ const CartContainer: React.FC = () => {
   return (
     <div className="cart-container">
       {cartItems.length ? (
-        <>
+        <div role="list">
           {cartItems.map((item) => {
             return (
               <CartItem
@@ -34,7 +34,7 @@ const CartContainer: React.FC = () => {
           <div className="cart-total">
             <CartTotal cartItems={cartItems}></CartTotal>
           </div>
-        </>
+        </div>
       ) : (
         <div className="empty-cart">
           <h2>No Item in the cart!</h2>

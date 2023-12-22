@@ -8,7 +8,7 @@ jest.mock("../context/cartContext", () => ({
   useCart: jest.fn(),
 }));
 describe("CartContainer Component", () => {
-  it("renders cart items and total correctly", () => {
+  test("renders cart items and total correctly", async () => {
     (useCart as jest.Mock).mockReturnValue({
       cartItems: [
         { product: { id: 1, name: "Product 1", price: 20 }, qty: 2 },
@@ -25,8 +25,8 @@ describe("CartContainer Component", () => {
       </CartProvider>
     );
 
-    expect(screen.getByText("Product 1")).toBeInTheDocument();
-    expect(screen.getByText("Product 2")).toBeInTheDocument();
+    const list = await screen.findAllByRole('listitem');
+    expect(list).toHaveLength(2);
   });
 
   it("displays a message for an empty cart", () => {

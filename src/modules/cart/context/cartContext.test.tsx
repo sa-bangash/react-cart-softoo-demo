@@ -1,6 +1,7 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import { CartItemModel } from "../models/CartItem";
 import { CartProvider, useCart } from "./cartContext";
+import user from "@testing-library/user-event";
 import { useEffect } from "react";
 
 const ItemsTestComponent = () => {
@@ -18,16 +19,14 @@ const ItemsTestComponent = () => {
 };
 describe("CartProvider", () => {
   it("should provide cart context", () => {
-    render(
-      <CartProvider>
-        <ItemsTestComponent />
-      </CartProvider>
-    );
+    render(<ItemsTestComponent />, {
+      wrapper: CartProvider,
+    });
 
     expect(screen.getByTestId("cart-items")).toBeInTheDocument();
   });
 
-  it("should add items to the cart", () => {
+  test("should add items to the cart", async () => {
     const TestComponent = () => {
       const cart = useCart();
       return (
@@ -50,19 +49,21 @@ describe("CartProvider", () => {
     };
 
     render(
-      <CartProvider>
+      <>
         <TestComponent />
         <ItemsTestComponent />
-      </CartProvider>
+      </>,
+      {
+        wrapper: CartProvider,
+      }
     );
 
-    const addToCartBtn = screen.getByText("Add to Cart");
+    const addToCartBtn = screen.getByRole("button");
     expect(addToCartBtn).toBeInTheDocument();
 
-    act(() => {
-      addToCartBtn.click();
+    await act(async () => {
+      await user.click(addToCartBtn);
     });
-
     const cartItems = screen.getByTestId("cart-items");
     expect(cartItems).toHaveTextContent("Test Product");
   });
@@ -84,10 +85,13 @@ describe("CartProvider", () => {
     };
 
     render(
-      <CartProvider>
+      <>
         <TestComponent />
         <ItemsTestComponent></ItemsTestComponent>
-      </CartProvider>
+      </>,
+      {
+        wrapper: CartProvider,
+      }
     );
 
     const removeFromCartBtn = screen.getByText("Remove from Cart");
@@ -124,10 +128,11 @@ describe("CartProvider", () => {
     };
 
     render(
-      <CartProvider>
+      <>
         <TestComponent />
         <ItemsTestComponent></ItemsTestComponent>
-      </CartProvider>
+      </>,
+      { wrapper: CartProvider }
     );
 
     const reduceQuantityBtn = screen.getByText("-");
