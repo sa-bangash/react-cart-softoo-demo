@@ -48,5 +48,5 @@ export const CartItem: React.FC<CartProductProps> = memo(
       </div>
     );
   },
-  areEqual
+  areEqual,
 );

@@ -28,6 +28,6 @@ describe("CartTotal Component", () => {
 
   it("renders cart total correctly", () => {
     render(<CartTotal cartItems={mockItems} />);
-    expect(screen.getByText('$18.00')).toBeInTheDocument();
+    expect(screen.getByText("$18.00")).toBeInTheDocument();
   });
 });

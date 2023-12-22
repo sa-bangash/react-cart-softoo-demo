@@ -55,7 +55,7 @@ describe("CartProvider", () => {
       </>,
       {
         wrapper: CartProvider,
-      }
+      },
     );
 
     const addToCartBtn = screen.getByRole("button");
@@ -91,7 +91,7 @@ describe("CartProvider", () => {
       </>,
       {
         wrapper: CartProvider,
-      }
+      },
     );
 
     const removeFromCartBtn = screen.getByText("Remove from Cart");
@@ -132,7 +132,7 @@ describe("CartProvider", () => {
         <TestComponent />
         <ItemsTestComponent></ItemsTestComponent>
       </>,
-      { wrapper: CartProvider }
+      { wrapper: CartProvider },
     );
 
     const reduceQuantityBtn = screen.getByText("-");

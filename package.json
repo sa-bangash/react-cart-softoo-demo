@@ -10,6 +10,7 @@
     "@types/node": "^16.18.68",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.17",
+    "lint-staged": "^15.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -21,7 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --ignore-path .ignore --write \"**/*.{ts,tsx,css,scss}\""
+    "format": "prettier --ignore-path .ignore --write \"**/*.{ts,tsx,css,scss}\"",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -42,7 +44,12 @@
     ]
   },
   "devDependencies": {
+    "husky": "^8.0.0",
     "node-sass": "^7.0.3",
     "prettier": "3.1.1"
+  },
+  "lint-staged":{
+    "*.ts":["eslint"],
+    "*.{ts,html,scss,css}":["prettier --write"]
   }
 }

@@ -23,7 +23,7 @@ describe("cartItem component", () => {
         onAdd={mockOnAdd}
         onReduce={mockOnReduce}
         onRemove={mockOnRemove}
-      />
+      />,
     );
 
     expect(screen.getByText(mockCartItem.qty)).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe("cartItem component", () => {
         onAdd={() => {}}
         onReduce={() => {}}
         onRemove={() => {}}
-      ></CartItem>
+      ></CartItem>,
     );
 
     expect(screen.getByRole("heading", { name: "1" })).toBeInTheDocument();
@@ -64,7 +64,7 @@ describe("cartItem component", () => {
         onAdd={mockOnAdd}
         onReduce={() => {}}
         onRemove={() => {}}
-      />
+      />,
     );
     fireEvent.click(screen.getByTestId("add-btn"));
     expect(mockOnAdd).toHaveBeenCalledTimes(1);
@@ -77,7 +77,7 @@ describe("cartItem component", () => {
         onAdd={() => {}}
         onReduce={() => {}}
         onRemove={mockOnRemove}
-      />
+      />,
     );
     fireEvent.click(screen.getByTestId("remove-btn"));
     expect(mockOnRemove).toHaveBeenCalledTimes(1);
@@ -91,7 +91,7 @@ describe("cartItem component", () => {
         onAdd={() => {}}
         onReduce={mockOnReduce}
         onRemove={() => {}}
-      />
+      />,
     );
     fireEvent.click(screen.getByTestId("reduce-btn"));
     expect(mockOnReduce).toHaveBeenCalledTimes(1);
@@ -104,7 +104,7 @@ describe("cartItem component", () => {
         onAdd={() => {}}
         onReduce={() => {}}
         onRemove={() => {}}
-      />
+      />,
     );
     const reducerButton = screen.getByTestId("reduce-btn") as HTMLButtonElement;
     expect(reducerButton.disabled).toBe(true);

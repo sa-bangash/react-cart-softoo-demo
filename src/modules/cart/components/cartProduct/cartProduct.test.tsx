@@ -8,7 +8,7 @@ describe("CartProduct Component", () => {
     name: "Test Product",
     price: 20,
     img: "test-image-url",
-    colour: "Black"
+    colour: "Black",
   };
 
   it("renders product details correctly", () => {

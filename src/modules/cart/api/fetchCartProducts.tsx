@@ -3,7 +3,7 @@ export type FetchCartProductParam = {
   colour: string;
 };
 export const fetchCartProduct = async (
-  param?: FetchCartProductParam
+  param?: FetchCartProductParam,
 ): Promise<Array<Product>> => {
   const queryParams = new URLSearchParams();
   if (param && param.colour) {
@@ -11,7 +11,7 @@ export const fetchCartProduct = async (
   }
   try {
     const response = await fetch(
-      `https://my-json-server.typicode.com/benirvingplt/products/products?${queryParams.toString()}`
+      `https://my-json-server.typicode.com/benirvingplt/products/products?${queryParams.toString()}`,
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

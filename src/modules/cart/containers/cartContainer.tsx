@@ -4,9 +4,9 @@ import { useCart } from "../context/cartContext";
 import Product from "../../../core/models/product";
 
 const CartContainer: React.FC = () => {
-  const { cartItems, removeFromCart, reduceQantity,addToCart } = useCart();
+  const { cartItems, removeFromCart, reduceQantity, addToCart } = useCart();
   const handleAdd = (product: Product) => {
-    addToCart(product)
+    addToCart(product);
   };
 
   const handleReduce = (productId: number) => {

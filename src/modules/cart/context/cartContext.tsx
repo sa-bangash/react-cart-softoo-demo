@@ -31,7 +31,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({
   const addToCart = (product: Product) => {
     setCartItems((prevCartItems) => {
       const index = prevCartItems.findIndex(
-        (item) => item.product.id === product.id
+        (item) => item.product.id === product.id,
       );
       if (index > -1) {
         const updateState = [...prevCartItems];
@@ -52,13 +52,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({
   };
   const removeFromCart = (productId: number) => {
     setCartItems((prevItems) =>
-      prevItems.filter((item) => item.product.id !== productId)
+      prevItems.filter((item) => item.product.id !== productId),
     );
   };
   const reduceQantity = (productId: number) => {
     setCartItems((prevItems) => {
       const index = prevItems.findIndex(
-        (item) => item.product.id === productId
+        (item) => item.product.id === productId,
       );
       if (index > -1) {
         const updateState = [...prevItems];

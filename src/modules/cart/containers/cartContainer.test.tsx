@@ -22,10 +22,10 @@ describe("CartContainer Component", () => {
     render(
       <CartProvider>
         <CartContainer />
-      </CartProvider>
+      </CartProvider>,
     );
 
-    const list = await screen.findAllByRole('listitem');
+    const list = await screen.findAllByRole("listitem");
     expect(list).toHaveLength(2);
   });
 
@@ -40,7 +40,7 @@ describe("CartContainer Component", () => {
     render(
       <CartProvider>
         <CartContainer />
-      </CartProvider>
+      </CartProvider>,
     );
     expect(screen.getByText("No Item in the cart!")).toBeInTheDocument();
   });
