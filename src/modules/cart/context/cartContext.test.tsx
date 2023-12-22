@@ -61,6 +61,7 @@ describe("CartProvider", () => {
     const addToCartBtn = screen.getByRole("button");
     expect(addToCartBtn).toBeInTheDocument();
 
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
       await user.click(addToCartBtn);
     });
